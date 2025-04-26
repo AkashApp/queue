@@ -111,15 +111,56 @@ MyCircularQueue.prototype.getRear = function() {
     return this.queue[this.queue.length - 1];
 };
 
-var myCircularQueue = new MyCircularQueue(3);
+// var myCircularQueue = new MyCircularQueue(3);
 
-myCircularQueue.enQueue(1);
-myCircularQueue.enQueue(2);
-myCircularQueue.enQueue(3);
-myCircularQueue.enQueue(4);
-myCircularQueue.deQueue();
-myCircularQueue.enQueue(7);
+// myCircularQueue.enQueue(1);
+// myCircularQueue.enQueue(2);
+// myCircularQueue.enQueue(3);
+// myCircularQueue.enQueue(4);
+// myCircularQueue.deQueue();
+// myCircularQueue.enQueue(7);
 
-console.log(myCircularQueue);
-console.log(myCircularQueue.getFront());
-console.log(myCircularQueue.getRear());
+// console.log(myCircularQueue);
+// console.log(myCircularQueue.getFront());
+// console.log(myCircularQueue.getRear());
+
+// Implement a stack using queues
+// design a stack using two queues
+
+var MyStack = function() {
+    this.q1 = [];
+    this.q2 = [];
+};
+
+MyStack.prototype.push = function(x) {
+    while (this.q1.length > 0) {
+        this.q2.push(this.q1.shift());
+    }
+    this.q1.push(x);
+    while(this.q2.length > 0) {
+        this.q1.push(this.q2.shift());
+    }
+};
+
+MyStack.prototype.pop = function() {
+    return this.q1.shift();
+};
+
+MyStack.prototype.top = function() {
+    return this.q1[0];
+};
+
+MyStack.prototype.empty = function() {
+    return this.q1.length === 0;
+};
+
+
+var myStack = new MyStack();
+
+myStack.push(1);
+myStack.push(2);
+myStack.push(3);
+
+console.log(myStack.pop());
+console.log(myStack.top());
+console.log(myStack.empty());
