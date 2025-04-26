@@ -44,22 +44,82 @@ class Queue {
 
 const myQueue = new Queue();
 
-myQueue.enqueue(1);
-myQueue.enqueue(2);
-myQueue.enqueue(3);
-myQueue.enqueue(4);
+// myQueue.enqueue(1);
+// myQueue.enqueue(2);
+// myQueue.enqueue(3);
+// myQueue.enqueue(4);
 
-myQueue.print();
-console.log(myQueue.peek());
+// myQueue.print();
+// console.log(myQueue.peek());
 
-myQueue.dequeue();
-myQueue.print();
-console.log(myQueue.peek());
-console.log(myQueue.size());
+// myQueue.dequeue();
+// myQueue.print();
+// console.log(myQueue.peek());
+// console.log(myQueue.size());
 
-myQueue.dequeue();
-myQueue.dequeue();
-console.log(myQueue.dequeue());
-console.log(myQueue.dequeue());
+// myQueue.dequeue();
+// myQueue.dequeue();
+// console.log(myQueue.dequeue());
+// console.log(myQueue.dequeue());
 
-console.log(myQueue.isEmpty());
+// console.log(myQueue.isEmpty());
+
+
+// Circular queue implementation
+// design a circular queue that supports all the operations of a normal queue
+
+var MyCircularQueue = function(k) {  // k is the size
+    this.queue = [];
+    this.size = k;
+};
+
+MyCircularQueue.prototype.enQueue = function(value) {
+    if (this.isFull()) {
+        return false;
+    }
+    this.queue.push(value);
+    return true;
+};
+
+MyCircularQueue.prototype.deQueue = function() {
+    if (this.isEmpty()) {
+        return false;
+    }
+    this.queue.shift();
+    return true;
+};
+
+MyCircularQueue.prototype.isEmpty = function() {
+    return this.queue.length === 0;
+};
+
+MyCircularQueue.prototype.isFull = function() {
+    return this.size === this.queue.length;
+};
+
+MyCircularQueue.prototype.getFront = function() {
+    if (this.isEmpty()) {
+        return -1;
+    }
+    return this.queue[0];
+};
+
+MyCircularQueue.prototype.getRear = function() {
+    if (this.isEmpty()) {
+        return -1;
+    }
+    return this.queue[this.queue.length - 1];
+};
+
+var myCircularQueue = new MyCircularQueue(3);
+
+myCircularQueue.enQueue(1);
+myCircularQueue.enQueue(2);
+myCircularQueue.enQueue(3);
+myCircularQueue.enQueue(4);
+myCircularQueue.deQueue();
+myCircularQueue.enQueue(7);
+
+console.log(myCircularQueue);
+console.log(myCircularQueue.getFront());
+console.log(myCircularQueue.getRear());
