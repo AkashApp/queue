@@ -155,12 +155,57 @@ MyStack.prototype.empty = function() {
 };
 
 
-var myStack = new MyStack();
+// var myStack = new MyStack();
 
-myStack.push(1);
-myStack.push(2);
-myStack.push(3);
+// myStack.push(1);
+// myStack.push(2);
+// myStack.push(3);
 
-console.log(myStack.pop());
-console.log(myStack.top());
-console.log(myStack.empty());
+// console.log(myStack.pop());
+// console.log(myStack.top());
+// console.log(myStack.empty());
+
+
+// Implement a queue using stacks
+// design a queue using two stacks
+
+var MyQueue = function() {
+    this.stack1 = [];
+    this.stack2 = [];
+};
+
+MyQueue.prototype.enqueue = function(x) {
+    this.stack1.push(x);
+};
+
+MyQueue.prototype.dequeue = function() {
+    if (this.stack2.length === 0) {
+        while (this.stack1.length > 0) {
+            this.stack2.push(this.stack1.pop());
+        }
+    }
+    return this.stack2.pop();
+
+};
+
+MyQueue.prototype.front = function() {
+    if (this.stack2.length === 0) {
+        while (this.stack1.length > 0) {
+            this.stack2.push(this.stack1.pop());
+        }
+    }
+    return this.stack2[this.stack2.length - 1];
+};
+
+MyQueue.prototype.empty = function() {
+    return this.stack1.length === 0 && this.stack2.length === 0;
+};
+
+const myQueue1 = new MyQueue();
+
+myQueue1.enqueue(1);
+myQueue1.enqueue(2);
+myQueue1.enqueue(3);
+
+console.log(myQueue1.dequeue());
+console.log(myQueue1.front());
